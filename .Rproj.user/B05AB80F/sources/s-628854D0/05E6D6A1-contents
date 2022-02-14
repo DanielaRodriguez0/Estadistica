@@ -1,0 +1,118 @@
+# En esta sesión trabajaremos la Importación de algunos tipos de datos
+# .txt Documento tipo texto.
+# .csv Documento (Comma Separated Values) datos con un separador (, . ;)
+# .xls Documento de excel (formato binario de datos)
+# .xlsx Documento de excel (Open XML : x- Extensible Markup Languaje)
+# .json Formato de Java (JavaScript Objet Notation)
+# .sav (documento desde SPSS)
+# .dta (documento desde STATA)
+
+# Los menús de R cargan los datos no como R-base. Utiliza : readr and haven.
+# Por ejemplo en R base cargamos los .csv con la función read.csv()
+# La función en paquete es: readr y la función es read_csv().
+
+# Esto tiene ventajas, como por ejemplos:
+# Rapidez
+# Se producen tibbles en vez de data.frames.
+
+
+# Importa datos desde R-Base --------------------------------------
+
+#Datos tipo txt : # En esta parte usaremos la función read.table()
+
+data1 <- read.table('BASES/TABLA_PERSONAS.txt', #base
+                   header = T, #encabezados dependen si hay o o no
+                   fill=F # si hay datos faltantes coloca cero
+                   ) 
+data1
+summary(data1)
+# file: nombre del archivo
+#header: valores logicos
+#sep : tipo de separador
+#nrows: numero de filas
+#skip : numero de filas a omitir
+
+
+data2 <- read.table('BASES/TABLA_PERSONAS.txt', #base
+                   header = F, #encabezados dependen si hay o o no
+                   fill=T, # si hay datos faltantes coloca cero
+                   nrows = 3)
+data2
+
+
+data3 <- read.csv('BASES/TABLA_PERSONAS.csv', sep = ";") 
+
+data3
+
+# Importar Datos csv and xls-xlsx desde consola --------------------------------
+
+install.packages("tidyverse")
+install.packages("readr")
+library(readr)
+
+TABLA_PERSONAS <- read_delim("BASES/TABLA_PERSONAS.txt", 
+                             "\t", escape_double = FALSE, trim_ws = TRUE)
+View(TABLA_PERSONAS)
+
+
+# necesitamos la libreria readxl para archicos xlsx
+
+library(readxl)
+HEPATITIS <- read_excel("BASES/HEPATITIS.xlsx")
+View(HEPATITIS)
+
+#librería necesaria para read_csv es un caso particular de read_delim 
+
+#read_csv delimitador con coma
+
+#read_csv2 delimitador con punto y coma (semicolon)
+
+library(readr)
+
+CANGREJOS <- read_delim("BASES/CANGREJOS.csv", 
+                        ";", escape_double = FALSE, trim_ws = TRUE)
+View(CANGREJOS)
+
+# importar un archivo .json
+
+# necesitamos la librería library(jsonlite)
+
+library(jsonlite)
+
+datajason <- fromJSON("BASES/fff.json")
+View(datajason)    
+
+datajason2 <- fromJSON("BASES/espectro.json") 
+View(datajason2)
+
+# importar un archivo .sav : archivos de SAS
+
+# necesitamos el paquete haven
+
+library(haven)
+DESIGUALES <- read_sav("BASES/DESIGUALES.sav")
+View(DESIGUALES)
+
+# importar un archivo .dta : SPSS
+
+# necesitamos el paquete haven
+library(haven)
+
+DESIGUALES2 <- read_dta("BASES/DESIGUALES.dta")
+
+# Importar datos de Internet ----------------------------------------------
+
+download.file(
+  url = "https://archive.ics.uci.edu/ml/machine-learning-databases/adult/adult.data", 
+  destfile = "adult.data" )
+
+#https://dev.socrata.com/foundry/www.datos.gov.co/xhu9-3dq9
+
+download.file(
+  url = "https://www.datos.gov.co/resource/xhu9-3dq9.json", 
+  destfile = "ffG.json" )
+
+datajason2 <- fromJSON("ffG.json")
+
+
+

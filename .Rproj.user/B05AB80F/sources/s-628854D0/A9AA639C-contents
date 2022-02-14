@@ -1,0 +1,423 @@
+---
+title: "Clase-R"
+author: "Fabián Sánchez"
+date: "6/02/201" 
+output: html_document
+---
+
+<p style="background:orange; color:black; font-weight:bold;
+padding:5px; border:1px solid #B34F19; margin-top:5px; 
+margin-bottom:5px; text-align:center; font-size:15px; 
+border-radius:5px;" > Operaciones Aritméticas en R </p>
+
+En R podemos trabajar diferentes tipo de operaciones 
+
+- Suma : *+*
+- Resta : *-*
+- Multiplicación: asterisco *
+- División: */*
+- Potencia *^* : ^ circumflex accent alt+94
+- Módulo *%%* : es el residuo de la división
+- Raíz cuadrada *sqrt()* o equivalente *a^{1/2}*
+
+```{r}
+3+4+5
+5-9
+16*8
+200/5
+3^4
+201%%7
+sqrt(150)
+150^{1/2}
+```
+
+**Observación:** No colocar paréntesis produce error
+
+```{r, eval=F}
+4+3(5+3)
+```
+
+- Función de redondeo : *round(x, número de decimales)*
+
+```{r}
+round(120^{1/2},1)
+round(120^{1/2},2)
+round(120^{1/2},3)
+```
+
+<p style="background:pink; color:white; font-weight:bold;
+padding:5px; border:1px solid #B34F19; margin-top:5px; 
+margin-bottom:5px; text-align:center; font-size:15px; 
+border-radius:5px;" > Tipos de Datos </p>
+
+En R tenemos los siguientes tipos de datos
+
+- *numeric* : números , float, doubles
+
+- *logical* : FALSE or TRUE (F o T)
+
+- *character* : "cadena de texto" : importante las comillas
+
+- *factor* : etiquetas datos categóricos
+
+- *integer*: enteros (5L) colocamos una L al final
+
+- *NA*: not available
+
+- *NULL* : vacíos
+
+- <span style="color:red">para colocar color a la letra.</span>
+
+**Nota: Para ver el tipo de dato usamos la función class**. Veamos algunos ejemplos
+
+1. Datos númericos
+
+```{r}
+class(4)
+class(120^{1/3})
+```
+
+2. Datos lógicos
+
+```{r}
+class(F)
+class(T)
+```
+
+3. Datos tipo cadena de texto. Se colocan dentro de comillas "dato tipo texto" o también llamado *string*
+
+```{r}
+class("fabian")
+class("50")
+class(50)
+```
+
+Observe que si no coloca las comillas se interpreta como un número.
+
+4. Datos tipo factor. Representa las categorías de una variable categóricas.
+
+```{r}
+sexo <- c("masculino", "femenino", "femenino",
+          "masculino", "femenino") 
+f <- factor(sexo)
+class(f)
+```
+
+5. Los datos enteros se diferencian de los numéricos mediante una L al final
+
+```{r}
+class(6L)
+class(7L+5L)
+class(6)
+```
+
+6. Las palabras restringida *NA* y *NULL*
+
+*NA* : Not available o no disponible 
+
+*NULL* : no existe ausencia 
+
+```{r}
+u <- c(2,3,4)
+u[5]
+```
+
+```{r}
+f <- list(a=c(1,2), b=c(2,5), d=c(2,3,5))
+f$a
+f$b
+f$e
+```
+
+<p style="background:purple; color:white; font-weight:bold;
+padding:5px; border:1px solid #B34F19; margin-top:5px; 
+margin-bottom:5px; text-align:center; font-size:15px; 
+border-radius:5px;" > Operadores en R </p>
+
+En R tenemos los siguientes tipos de operadores
+
+- Aritméticos : + * - / 
+- Relacionales : comparar < , > , >= , <= 
+- Lógicos : & (y) , | (o) , ! (negación not) , == comparación
+- Asignación: <- , = , assign()
+
+1. Los operadores aritméticos son los que sirven para hacer operaciones 
+
+```{r}
+4+6-4*4+6/3
+```
+
+2. Operadores relacionales: Son los que sirven para comparar una cantidad con otra y dan como resultado una variable lógica *Falso* o *Verdadero* , es decir; *T* or *F*.
+
+```{r}
+5>6
+3<8
+5==7
+4>=4
+5>=3
+3>=7
+```
+
+**Observación:** Para la comparación de igualdad se usa *==*. Si se usa *=* se produce un error. Se aplica para variables de tipo lógico o numérico.
+
+3. Operadores lógicos. 
+
+```{r}
+7>6 & 8>-3
+F&T
+F|T
+```
+
+4. Operadores de asignación. Permiten asignar un valor a una variable
+
+- **Nota: <- se puede obtener con alt + guión **
+
+```{r}
+x <- 4 
+z=10
+```
+
+<p style="background:purple; color:white; font-weight:bold;
+padding:5px; border:1px solid #B34F19; margin-top:5px; 
+margin-bottom:5px; text-align:center; font-size:15px; 
+border-radius:5px;" > Elementos básicos de R </p>
+
+- Números 
+- Sucesiones (secuencias)
+- Vectores 
+- Matrices
+- Dataframes
+
+- <span style="color:red"> Secuencias </span>
+
+Para generar secuencias en R podemos usar los comandos
+
+- *a:b* secuencia de uno en uno desde *a* hasta *b*
+- *seq(a,b)* secuencia de uno en uno desde *a* hasta *b*
+- *seq(a,b,by=c)* secuencia de *c* en *c* desde *a* hasta *b*
+
+```{r}
+u1 <- 2:5 ; u1
+```
+
+```{r}
+u2 <- seq(3,6) ; u2
+```
+
+```{r}
+seq(3,20,3)
+```
+
+- <span style="color:red"> Vectores </span>
+
+Para generar vectores usamos la instrucción *c()*
+
+```{r}
+w1 <- c(3,5,6,7,2,5); w1
+w2 <- 3:7 ; w2
+w3 <- seq(3,15) ; w3
+w4 <- seq(3,16,3) ; w4
+```
+
+Tipo de elemento *class()*
+
+```{r}
+class(w1)
+class(3:7)
+```
+
+Podemos hacer operaciones con vectores
+
+```{r}
+w5 <- c(1,3,5)
+w6 <- c(10,12,14)
+w7 <- c(2,4,6,8)
+w5+w6
+w5+w7
+w5*w6
+w5*w7
+w5/w6
+```
+
+- Reciclaje:
+
+```{r, eval=F}
+w8 <- c(2,4,5,9,10,3,6,4)
+w9 <- c(2,5,6,7,1)
+w8+w9
+```
+
+- Selección de elementos de un vector
+
+```{r}
+t <- c(2,5,6,10,5,6,10,2)
+t[3] # selecciona la posición 3
+t[-3] # quita la posición 3
+t[3:5]
+t[t>4] # toma los valores donde se cumple la condición
+which(t>4) # posiciones donde se cumple la condición
+t[which(t>4)]
+```
+
+- Podemos generar vectores de los diferentes tipos de elementos
+
+```{r}
+class(c(2,3,4))
+class(c(F,T,F))
+class(c("fa", "do", "mi"))
+class(c("2","3","4"))
+class(c(2,3,"f"))
+```
+
+Ahora bien, la pregunta es, ¿qué sucede si no son del mismo tipo?
+
+
+- Coerción: logical---numeric---character . La instrucción para forzar coerción es as.(tipo de dato)()
+
+```{r}
+v1 <- c("4","5","6")
+class(v1)
+v2 <- as.numeric(v1);v2
+class(w2)
+```
+
+```{r}
+v3 <- c(T, F , "3")
+class(v3)
+v4 <- as.numeric(v3); v4
+class(v4)
+```
+
+- <span style="color:maroon"> Matriz </span>
+
+Para formar matrices utilizamos el comando *matrix(vector)*
+
+```{r}
+A <- matrix(c(3,5,6,2,7,8), nrow = 3);A 
+```
+
+- dimensión de la matriz
+
+```{r}
+dim(A) 
+```
+
+- Nombre de las filas y columnas
+```{r}
+rownames(A) # nombre de las filas
+colnames(A) # nombre de las columnas
+```
+
+- Asignar nombre a las columnas
+```{r}
+colnames(A) <- c("tamaño", "muestra")
+rownames(A) <- c("p1", "p2", "p3")
+A
+```
+
+- Las funciones y operaciones se hacen componente a componente
+```{r}
+A^2
+sqrt(A) # raíz cuadrada
+exp(A) # la función exponencial
+log(A) # función logaritmo
+```
+
+```{r}
+B <- matrix(1:20, nrow=4) ; B
+```
+
+- Obtener elementos de la matriz B
+
+```{r}
+B[2,] # muestra la fila 2
+B[,3] # muestra la columna 3
+B[3,5] # muestra elemento (3,5)
+B[2:3 , 3:4] # fila 2 y 3 ; columna 3 y 4
+B[c(1,4) , c(1,4,5)] # fila 1 y 4 , # columna 1 4 y 8
+B[-4,-3] # suprime fila 4 y columna 3
+```
+
+```{r}
+k <- B[,3]; k
+class(k)
+```
+
+```{r}
+k1 <- as.data.frame(k); k1
+```
+
+- cbind y rbind
+
+```{r}
+w1 <- c(2,4)
+w2 <- c(3,6)
+w3 <- c(5,7)
+A1 <- cbind(w1,w2,w3) ;A1 # pegar columnas 
+A2 <- rbind(w1,w2,w3) # pegar filas
+class(A1)
+
+```
+
+```{r}
+w6 <- c(2,4)
+w7 <- c("3","6")
+A3 <- cbind(w6,as.numeric(w7));A3
+class(A3)
+```
+
+- %*% y %o%  (%in% , %>%)
+
+```{r}
+t1 <- c(3,4,5)
+t2 <- c(4,7,8)
+t1*t2
+t1 %*% t2
+t1 %o% t2
+```
+
+```{r}
+A <- matrix(c(1,2,3,4), nrow = 2) ; A
+t(A) # A^{T} transpuesta de A invertir filas y columnas
+solve(A) # calcular la inversa
+```
+
+
+- <span style="color:blue"> Data Frame </span>
+
+```{r}
+notas <- c(3,4,5)
+nombres <- c("fa", "do", "mi")
+sexo <- c("F", "M", "F")
+DF <- data.frame(notas,nombres,sexo); DF
+class(DF)
+```
+
+
+```{r}
+DF
+names(DF)
+str(DF)
+```
+
+- Explorar las variables
+```{r}
+DF$nombres
+class(DF$nombres)
+```
+
+- Cambiar la segunda variable a tipo chacacter
+```{r}
+DF
+DF$nombres <- as.character(DF$nombres)
+class(DF$nombres)
+str(DF)
+```
+
+
+
+
+
+
+
+
